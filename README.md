@@ -1,1 +1,3 @@
-# juce-tutorial
+# TL;DR
+
+Learnig JUCE with Official Tutorial
