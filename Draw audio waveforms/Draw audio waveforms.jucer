@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="lSc7kK" name="NewProject" projectType="guiapp" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
-  <MAINGROUP id="VgW6ab" name="NewProject">
+<JUCERPROJECT id="lSc7kK" name="Draw audio waveforms" projectType="guiapp"
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
+              jucerFormatVersion="1">
+  <MAINGROUP id="VgW6ab" name="Draw audio waveforms">
     <GROUP id="{BDBBC6CE-3028-2C16-FA6E-2521FA0427D1}" name="Source">
       <FILE id="LkwtWc" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="lc2Hm8" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>

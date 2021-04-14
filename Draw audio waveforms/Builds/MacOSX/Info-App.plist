@@ -8,11 +8,11 @@
     <key>CFBundleIconFile</key>
     <string></string>
     <key>CFBundleIdentifier</key>
-    <string>com.yourcompany.NewProject</string>
+    <string>com.yourcompany.Drawaudiowaveforms</string>
     <key>CFBundleName</key>
-    <string>NewProject</string>
+    <string>Draw audio waveforms</string>
     <key>CFBundleDisplayName</key>
-    <string>NewProject</string>
+    <string>Draw audio waveforms</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleSignature</key>
