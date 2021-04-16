@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="yT5AER" name="NewProject" projectType="guiapp" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
-  <MAINGROUP id="Yht6Bg" name="NewProject">
+<JUCERPROJECT id="yT5AER" name="SliderValuesTutorial" projectType="guiapp"
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
+              jucerFormatVersion="1">
+  <MAINGROUP id="Yht6Bg" name="SliderValuesTutorial">
     <GROUP id="{B1E786D0-3E93-BBF7-2849-C93511F3C92D}" name="Source">
       <FILE id="RMO6rP" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="EaRoWx" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
