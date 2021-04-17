@@ -9,10 +9,6 @@
       <FILE id="oHXUPj" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="lbeK4n" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
-      <FILE id="Io65c4" name="IncomingMessageCallback.h" compile="0" resource="0"
-            file="Source/IncomingMessageCallback.h"/>
-      <FILE id="ioKgYc" name="IncomingMessageCallback.cpp" compile="1" resource="0"
-            file="Source/IncomingMessageCallback.cpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
