@@ -9,6 +9,10 @@
       <FILE id="hoefc8" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="awGCyF" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
+      <FILE id="YqZc8E" name="SynthAudioSource.h" compile="0" resource="0"
+            file="Source/SynthAudioSource.h"/>
+      <FILE id="JF7Jxq" name="SynthAudioSource.cpp" compile="1" resource="0"
+            file="Source/SynthAudioSource.cpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
