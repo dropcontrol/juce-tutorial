@@ -9,6 +9,14 @@
       <FILE id="JXUHeA" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="j2VGP8" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
+      <FILE id="rkP06H" name="SineOscillator.h" compile="0" resource="0"
+            file="Source/SineOscillator.h"/>
+      <FILE id="J8Ahcg" name="SineOscillator.cpp" compile="1" resource="0"
+            file="Source/SineOscillator.cpp"/>
+      <FILE id="LzVqb6" name="WavetableOscillator.h" compile="0" resource="0"
+            file="Source/WavetableOscillator.h"/>
+      <FILE id="uPjdvf" name="WavetableOscillator.cpp" compile="1" resource="0"
+            file="Source/WavetableOscillator.cpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
@@ -46,4 +54,7 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
 </JUCERPROJECT>
