@@ -19,9 +19,22 @@ AudioProcessorValueTreeStateTutorialAudioProcessor::AudioProcessorValueTreeState
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
 #endif
+    parameters(*this, nullptr, juce::Identifier("APVSTTutorial"), {
+        std::make_unique<juce::AudioParameterFloat>("gain",
+                                                    "Gain",
+                                                    0.0f,
+                                                    1.0f,
+                                                    0.5f),
+        std::make_unique<juce::AudioParameterBool>("invertPhase",
+                                                   "Invert Phase",
+                                                   false)
+    })
 {
+    phaseParameter = parameters.getRawParameterValue("invertPhase");
+    gainParameter = parameters.getRawParameterValue("gain");
+    
 }
 
 AudioProcessorValueTreeStateTutorialAudioProcessor::~AudioProcessorValueTreeStateTutorialAudioProcessor()
@@ -95,6 +108,8 @@ void AudioProcessorValueTreeStateTutorialAudioProcessor::prepareToPlay (double s
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    auto phase = *phaseParameter < 0.5f ? 1.0f : -1.0f;
+    previousGain = *gainParameter * phase;
 }
 
 void AudioProcessorValueTreeStateTutorialAudioProcessor::releaseResources()
@@ -152,9 +167,19 @@ void AudioProcessorValueTreeStateTutorialAudioProcessor::processBlock (juce::Aud
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+//        auto* channelData = buffer.getWritePointer (channel);
 
         // ..do something to the data...
+        auto phase = *phaseParameter < 0.5f ? 1.0f : -1.0f;
+        auto currentGain = *gainParameter * phase;
+        
+        if (currentGain == previousGain) {
+            buffer.applyGain(currentGain);
+        }
+        else {
+            buffer.applyGainRamp(channel, 0, buffer.getNumSamples(), previousGain, currentGain);
+            previousGain = currentGain;
+        }
     }
 }
 
@@ -166,7 +191,7 @@ bool AudioProcessorValueTreeStateTutorialAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* AudioProcessorValueTreeStateTutorialAudioProcessor::createEditor()
 {
-    return new AudioProcessorValueTreeStateTutorialAudioProcessorEditor (*this);
+    return new AudioProcessorValueTreeStateTutorialAudioProcessorEditor (*this, parameters);
 }
 
 //==============================================================================
@@ -175,12 +200,22 @@ void AudioProcessorValueTreeStateTutorialAudioProcessor::getStateInformation (ju
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    auto state = parameters.copyState();
+    std::unique_ptr<juce::XmlElement> xml(state.createXml());
+    copyXmlToBinary(*xml, destData);
 }
 
 void AudioProcessorValueTreeStateTutorialAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+    
+    if (xmlState.get() != nullptr) {
+        if (xmlState->hasTagName(parameters.state.getType())) {
+            parameters.replaceState(juce::ValueTree::fromXml(*xmlState));
+        }
+    }
 }
 
 //==============================================================================
