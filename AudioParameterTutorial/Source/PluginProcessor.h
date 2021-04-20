@@ -55,5 +55,11 @@ public:
 
 private:
     //==============================================================================
+    juce::AudioParameterFloat *gain;
+    juce::AudioParameterBool *invertPhase;
+    
+    float previousGain;
+
+    //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioParameterTutorialAudioProcessor)
 };

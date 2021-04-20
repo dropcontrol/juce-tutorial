@@ -22,6 +22,13 @@ AudioParameterTutorialAudioProcessor::AudioParameterTutorialAudioProcessor()
                        )
 #endif
 {
+    addParameter(gain = new juce::AudioParameterFloat("gain",
+                                                      "Gain",
+                                                      juce::NormalisableRange<float>(0.0f, 1.0f),
+                                                      0.5f));
+    addParameter(invertPhase = new juce::AudioParameterBool("invertPhase",
+                                                            "Invert Phase",
+                                                            false));
 }
 
 AudioParameterTutorialAudioProcessor::~AudioParameterTutorialAudioProcessor()
@@ -95,6 +102,8 @@ void AudioParameterTutorialAudioProcessor::prepareToPlay (double sampleRate, int
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    auto phase = *invertPhase ? -1.0f : 1.0f;
+    previousGain = *gain * phase;
 }
 
 void AudioParameterTutorialAudioProcessor::releaseResources()
@@ -152,9 +161,21 @@ void AudioParameterTutorialAudioProcessor::processBlock (juce::AudioBuffer<float
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+//        auto* channelData = buffer.getWritePointer (channel);
 
         // ..do something to the data...
+//        buffer.applyGain(*gain);
+        
+        auto phase = *invertPhase ? -1.0f : 1.0f;
+        auto currentGain = *gain * phase;
+        
+        if (currentGain == previousGain) {
+            buffer.applyGain(currentGain);
+        }
+        else {
+            buffer.applyGainRamp(channel, 0, buffer.getNumSamples(), previousGain, currentGain);
+            previousGain = currentGain;
+        }
     }
 }
 
@@ -175,12 +196,27 @@ void AudioParameterTutorialAudioProcessor::getStateInformation (juce::MemoryBloc
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+//    juce::MemoryOutputStream(destData, true).writeFloat(*gain);
+
+    std::unique_ptr<juce::XmlElement> xml(new juce::XmlElement("ParamTutorial"));
+    xml->setAttribute("gain", (double)*gain);
+    xml->setAttribute("invertPhase", *invertPhase);
+    copyXmlToBinary(*xml, destData);
 }
 
 void AudioParameterTutorialAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+//    *gain = juce::MemoryInputStream(data, static_cast<size_t>(sizeInBytes), false).readFloat();
+    std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+    
+    if (xmlState.get() != nullptr) {
+        if (xmlState->hasTagName("ParamTutorial")) {
+            *gain = (float)xmlState->getDoubleAttribute("gain", 1.0);
+            *invertPhase = xmlState->getBoolAttribute("invertPhase", false);
+        }
+    }
 }
 
 //==============================================================================
