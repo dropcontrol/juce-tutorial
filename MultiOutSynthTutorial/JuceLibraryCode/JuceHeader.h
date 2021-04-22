@@ -41,8 +41,8 @@
 namespace ProjectInfo
 {
     const char* const  projectName    = "MultiOutSynthTutorial";
-    const char* const  companyName    = "Signal compose Inc.";
-    const char* const  versionString  = "1.0.0";
-    const int          versionNumber  = 0x10000;
+    const char* const  companyName    = "Signal compose";
+    const char* const  versionString  = "1.0.1";
+    const int          versionNumber  = 0x10001;
 }
 #endif

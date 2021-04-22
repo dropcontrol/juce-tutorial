@@ -4,9 +4,8 @@
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
               jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginManufacturer="masala dev" pluginManufacturerCode="MSLA"
-              companyName="Signal compose Inc." companyCopyright="Signal compose Inc."
-              pluginName="MultiOutSynthTutorial" pluginCode="Xl3o" pluginDesc="MultiOutSynthTutorial"
-              version="1.0.0">
+              companyName="Signal compose" companyCopyright="Signal compose"
+              pluginCode="Xl3o" version="1.0.1">
   <MAINGROUP id="TgfM9E" name="MultiOutSynthTutorial">
     <GROUP id="{F88D69FC-BBCA-A5DC-1F74-EEA1CE1F072E}" name="Source">
       <FILE id="Su08GW" name="PluginProcessor.h" compile="0" resource="0"

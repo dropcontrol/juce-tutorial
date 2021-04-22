@@ -69,7 +69,7 @@ private:
     };
     
     void loadNewSample(const juce::MemoryBlock &sampleData);
-    static juce::MidiBuffer filterMidiMessageesForChannel(const juce::MidiBuffer & input, int channel);
+    static juce::MidiBuffer filterMidiMessagesForChannel(const juce::MidiBuffer & input, int channel);
     
     juce::AudioFormatManager formatManager;
     juce::OwnedArray<juce::Synthesiser> synth;
