@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="XwiPqY" name="ArpeggiatorTutorial" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
-              jucerFormatVersion="1">
+              jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsMidiEffectPlugin,pluginProducesMidiOut,pluginWantsMidiIn"
+              pluginFormats="buildAU,buildAUv3,buildVST3">
   <MAINGROUP id="PolOpA" name="ArpeggiatorTutorial">
     <GROUP id="{DB512EDA-BDAB-D326-F38C-9C5696F03E24}" name="Source">
       <FILE id="lqGdS4" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -52,4 +53,7 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
 </JUCERPROJECT>

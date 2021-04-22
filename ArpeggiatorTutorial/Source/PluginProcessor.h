@@ -55,5 +55,12 @@ public:
 
 private:
     //==============================================================================
+    juce::AudioParameterFloat *speed;
+    int currentNote;
+    int lastNoteValue;
+    int time;
+    float rate;
+    juce::SortedSet<int> notes;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ArpeggiatorTutorialAudioProcessor)
 };

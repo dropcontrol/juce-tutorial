@@ -15,13 +15,14 @@ ArpeggiatorTutorialAudioProcessor::ArpeggiatorTutorialAudioProcessor()
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
                       #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+//                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
                       #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+//                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
                        )
 #endif
 {
+    addParameter(speed = new juce::AudioParameterFloat ("Speed", "Arpeggiator Speed", 0.0, 1.0, 0.5));
 }
 
 ArpeggiatorTutorialAudioProcessor::~ArpeggiatorTutorialAudioProcessor()
@@ -95,6 +96,11 @@ void ArpeggiatorTutorialAudioProcessor::prepareToPlay (double sampleRate, int sa
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    notes.clear();
+    currentNote = 0;
+    lastNoteValue = -1;
+    time = 0;
+    rate = static_cast<float>(sampleRate);
 }
 
 void ArpeggiatorTutorialAudioProcessor::releaseResources()
@@ -109,22 +115,22 @@ bool ArpeggiatorTutorialAudioProcessor::isBusesLayoutSupported (const BusesLayou
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
     return true;
-  #else
-    // This is the place where you check if the layout is supported.
-    // In this template code we only support mono or stereo.
-    // Some plugin hosts, such as certain GarageBand versions, will only
-    // load plugins that support stereo bus layouts.
-    if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
-        return false;
-
-    // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
-    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
-        return false;
-   #endif
-
-    return true;
+//  #else
+//    // This is the place where you check if the layout is supported.
+//    // In this template code we only support mono or stereo.
+//    // Some plugin hosts, such as certain GarageBand versions, will only
+//    // load plugins that support stereo bus layouts.
+//    if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
+//     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
+//        return false;
+//
+//    // This checks if the input layout matches the output layout
+//   #if ! JucePlugin_IsSynth
+//    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
+//        return false;
+//   #endif
+//
+//    return true;
   #endif
 }
 #endif
@@ -156,6 +162,36 @@ void ArpeggiatorTutorialAudioProcessor::processBlock (juce::AudioBuffer<float>& 
 
         // ..do something to the data...
     }
+    
+    
+    jassert(buffer.getNumChannels() == 0);
+    
+    auto numSamples = buffer.getNumSamples();
+    
+    auto noteDuration = static_cast<int>(std::ceil(rate * 0.25f * (0.1f - (*speed))));
+    
+    for (const auto metadata : midiMessages) {
+        const auto msg = metadata.getMessage();
+        if (msg.isNoteOn()) notes.add(msg.getNoteNumber());
+        else if (msg.isNoteOff()) notes.removeValue(msg.getNoteNumber());
+    }
+    midiMessages.clear();
+    
+    if ((time + numSamples) >= noteDuration) {
+        auto offset = juce::jmax(0, juce::jmin((int)(noteDuration - time), numSamples - 1));
+        
+        if (lastNoteValue > 0) {
+            midiMessages.addEvent(juce::MidiMessage::noteOff(1, lastNoteValue), offset);
+            lastNoteValue = -1;
+        }
+        
+        if (notes.size() > 0) {
+            currentNote = (currentNote + 1) % notes.size();
+            lastNoteValue = notes[currentNote];
+            midiMessages.addEvent(juce::MidiMessage::noteOn(1, lastNoteValue, (juce::uint8)127), offset);
+        }
+    }
+    time = (time + numSamples) % noteDuration;
 }
 
 //==============================================================================
@@ -175,12 +211,15 @@ void ArpeggiatorTutorialAudioProcessor::getStateInformation (juce::MemoryBlock& 
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    
+    juce::MemoryOutputStream(destData, true).writeFloat(*speed);
 }
 
 void ArpeggiatorTutorialAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    speed->setValueNotifyingHost(juce::MemoryInputStream(data, static_cast<size_t>(sizeInBytes), false).readFloat());
 }
 
 //==============================================================================
