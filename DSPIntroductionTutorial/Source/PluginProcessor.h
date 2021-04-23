@@ -9,6 +9,9 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "AudioBufferQueue.h"
+#include "ScopeDataCollector.h"
+#include "AudioEngine.h"
 
 //==============================================================================
 /**
@@ -52,8 +55,18 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    juce::MidiMessageCollector& getMidiMessageCollector() noexcept;
+
+    AudioBufferQueue<float> &getAudioBufferQueue() noexcept;
 
 private:
     //==============================================================================
+    AudioEngine audioEngine;
+    AudioBufferQueue<float> audioBufferQueue;
+    juce::MidiMessageCollector midiMessageCollector;
+    ScopeDataCollector<float> scopeDataCollector { audioBufferQueue };
+    
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSPIntroductionTutorialAudioProcessor)
 };

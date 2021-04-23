@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "ScopeComponent.h"
 
 //==============================================================================
 /**
@@ -28,6 +29,13 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     DSPIntroductionTutorialAudioProcessor& audioProcessor;
+    juce::MidiKeyboardState midiKeyboardState;
+    juce::MidiKeyboardComponent midiKeyboardComponent {
+        midiKeyboardState,
+        juce::MidiKeyboardComponent::horizontalKeyboard
+    };
+    ScopeComponent<float> scopeComponet;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSPIntroductionTutorialAudioProcessorEditor)
 };
+

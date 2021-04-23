@@ -189,3 +189,15 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new DSPIntroductionTutorialAudioProcessor();
 }
+
+juce::MidiMessageCollector  &DSPIntroductionTutorialAudioProcessor::getMidiMessageCollector() noexcept
+{
+    return midiMessageCollector;
+    
+}
+
+AudioBufferQueue<float> &DSPIntroductionTutorialAudioProcessor::getAudioBufferQueue() noexcept
+{
+    return audioBufferQueue;
+}
+
