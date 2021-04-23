@@ -14,30 +14,45 @@
 template <typename Type>
 class CustomOscillator {
 public:
-    CustomOscillator() {};
+    CustomOscillator() {
+        auto &osc = processorChain.template get<oscIndex>();
+        osc.initialise([](Type x) { return std::sin(x);}, 128);
+    };
     
     void setFrequency(Type newValue, bool force = false)
     {
-        juce::ignoreUnused(newValue, force);
+        auto &osc = processorChain.template get<oscIndex>();
+        osc.setFrequency(newValue, force);
     }
     
     void setLevel(Type newValue)
     {
-        juce::ignoreUnused(newValue);
+        auto &gain = processorChain.template get<gainIndex>();
+        gain.setGainLinear(newValue);
     }
     
-    void reset () noexcept {}
+    void reset () noexcept
+    {
+        processorChain.reset();
+    }
     
     template <typename ProcessContext>
     void process(const ProcessContext &context) noexcept
     {
-        juce::ignoreUnused(context);
+        processorChain.process(context);
     }
     
     void prepare(const juce::dsp::ProcessSpec &spec)
     {
-        juce::ignoreUnused(spec);
+        processorChain.prepare(spec);
     }
     
 private:
+    enum
+    {
+        oscIndex,
+        gainIndex
+    };
+    
+    juce::dsp::ProcessorChain<juce::dsp::Oscillator<Type>, juce::dsp::Gain<Type>> processorChain;
 };

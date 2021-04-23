@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="UNAP8O" name="DSPIntroductionTutorial" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
-              jucerFormatVersion="1">
+              jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="LF0jbR" name="DSPIntroductionTutorial">
     <GROUP id="{48597BD7-7694-99C2-868F-619B5DBB4C3E}" name="Source">
       <FILE id="ZaKQ4D" name="CustomOscillator.h" compile="0" resource="0"
