@@ -32,14 +32,19 @@ public:
 private:
     enum {
         osc1index,
+        osc2index,
+        osc3index,
+        filterIndex,
         masterGainIndex
     };
     
     juce::HeapBlock<char> heapBlock;
     juce::dsp::AudioBlock<float> tempBlock;
     
-    juce::dsp::ProcessorChain<CustomOscillator<float>, juce::dsp::Gain<float>> processorChain;
+    juce::dsp::ProcessorChain<CustomOscillator<float>, CustomOscillator<float>, CustomOscillator<float>, juce::dsp::LadderFilter<float>, juce::dsp::Gain<float>> processorChain;
     
-    
+    static constexpr size_t lfoUpdateRate = 100;
+    size_t lfoUpdateCounter = lfoUpdateRate;
+    juce::dsp::Oscillator<float> lfo;
 };
 

@@ -25,5 +25,9 @@ public:
 private:
     void renderNextSubBlock (juce::AudioBuffer<float> &outputAudio, int startSample, int numSamples) override;
 
+    enum {
+        reverbIndex
+    };
     
+    juce::dsp::ProcessorChain<juce::dsp::Reverb> fxChain;
 };

@@ -16,7 +16,17 @@ class CustomOscillator {
 public:
     CustomOscillator() {
         auto &osc = processorChain.template get<oscIndex>();
-        osc.initialise([](Type x) { return std::sin(x);}, 128);
+        // サイン波オシレータ
+//        osc.initialise([](Type x) { return std::sin(x);}, 128);
+        
+        // ノコギリ波オシレータ
+        osc.initialise([](Type x) {
+            return juce::jmap(x,
+                              Type(-juce::MathConstants<double>::pi),
+                              Type(juce::MathConstants<double>::pi),
+                              Type(-1),
+                              Type(1));
+        }, 2);
     };
     
     void setFrequency(Type newValue, bool force = false)
