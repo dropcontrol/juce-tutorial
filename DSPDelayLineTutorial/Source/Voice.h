@@ -11,6 +11,7 @@
 #pragma once
 #include <JuceHeader.h>
 #include "CustomOscillator.h"
+#include "WaveguideString.h"
 
 //==============================================================================
 class Voice  : public juce::MPESynthesiserVoice
@@ -32,6 +33,7 @@ public:
 private:
     enum {
         osc1index,
+        stringIndex,
         /*osc2index,*/
         /*osc3index,*/
         /*filterIndex,*/
@@ -41,7 +43,7 @@ private:
     juce::HeapBlock<char> heapBlock;
     juce::dsp::AudioBlock<float> tempBlock;
     
-    juce::dsp::ProcessorChain<CustomOscillator<float>, /*CustomOscillator<float>, juce::dsp::LadderFilter<float>,*/ juce::dsp::Gain<float>> processorChain;
+    juce::dsp::ProcessorChain<CustomOscillator<float>, WaveguideString<float>, /*CustomOscillator<float>, juce::dsp::LadderFilter<float>,*/ juce::dsp::Gain<float>> processorChain;
     
     static constexpr size_t lfoDownsamplingRatio = 128;
     size_t lfoProcessingIndex = lfoDownsamplingRatio;

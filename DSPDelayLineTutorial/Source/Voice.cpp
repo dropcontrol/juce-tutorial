@@ -43,13 +43,17 @@ void Voice::noteStarted()
     auto freqHz = (float)getCurrentlyPlayingNote().getFrequencyInHertz();
     
     processorChain.get<osc1index>().setFrequency(freqHz, true);
-    processorChain.get<osc1index>().setLevel(velocity);
+//    processorChain.get<osc1index>().setLevel(velocity);
     
 //    processorChain.get<osc2index>().setFrequency(freqHz * 1.01f, true);
 //    processorChain.get<osc2index>().setLevel(velocity);
     
 //    processorChain.get<osc3index>().setFrequency(freqHz * 0.99f, true);
 //    processorChain.get<osc3index>().setLevel(velocity);
+    
+    auto &stringModel = processorChain.get<stringIndex>();
+    stringModel.setFrequency(freqHz);
+    stringModel.trigger(velocity);
 }
 
 void Voice::notePitchbendChanged()

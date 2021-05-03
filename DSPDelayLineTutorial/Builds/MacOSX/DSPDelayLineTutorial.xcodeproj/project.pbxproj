@@ -136,6 +136,7 @@
 		E9C3BA9C3A265DBF7DC677FC /* JuceHeader.h */ /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
 		EA3F9E8B5BEFB1C68CC724F5 /* Delay.h */ /* Delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Delay.h; path = ../../Source/Delay.h; sourceTree = SOURCE_ROOT; };
 		EE8410C9E8BD6A72E1CB543D /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
+		EEB0B81D9A0FA450FBB50B9D /* WaveguideString.h */ /* WaveguideString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WaveguideString.h; path = ../../Source/WaveguideString.h; sourceTree = SOURCE_ROOT; };
 		F0CAC822407595BACBB69F80 /* juce_audio_utils */ /* juce_audio_utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_utils; path = "~/JUCE/modules/juce_audio_utils"; sourceTree = "<absolute>"; };
 		F78E57FB56F71A841FA94ECB /* include_juce_audio_plugin_client_VST3.cpp */ /* include_juce_audio_plugin_client_VST3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_VST3.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST3.cpp; sourceTree = SOURCE_ROOT; };
 		FB5BC2AC24515A550816F932 /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDSPIntroductionTutorial.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +207,7 @@
 		375C40C5484F841AB4114F3F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EEB0B81D9A0FA450FBB50B9D,
 				358E179DC1DA6F1ECB892450,
 				EA3F9E8B5BEFB1C68CC724F5,
 				7CFC33E616EB5E06415C1EED,

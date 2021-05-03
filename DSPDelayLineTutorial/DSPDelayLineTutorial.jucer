@@ -6,6 +6,8 @@
               pluginAUIsSandboxSafe="1">
   <MAINGROUP id="LF0jbR" name="DSPDelayLineTutorial">
     <GROUP id="{48597BD7-7694-99C2-868F-619B5DBB4C3E}" name="Source">
+      <FILE id="radxK8" name="WaveguideString.h" compile="0" resource="0"
+            file="Source/WaveguideString.h"/>
       <FILE id="TMcXr5" name="DelayLine.h" compile="0" resource="0" file="Source/DelayLine.h"/>
       <FILE id="lLa44O" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
       <FILE id="wwLhxI" name="CabSimulator.h" compile="0" resource="0" file="Source/CabSimulator.h"/>
