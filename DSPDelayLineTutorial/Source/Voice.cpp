@@ -71,10 +71,10 @@ void Voice::noteStopped(bool)
 
 void Voice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
-//    auto block = tempBlock.getSubBlock(0, (size_t)numSamples);
-//    block.clear();
-//    juce::dsp::ProcessContextReplacing<float> context(block);
-//    processorChain.process(context);
+    auto block = tempBlock.getSubBlock(0, (size_t)numSamples);
+    block.clear();
+    juce::dsp::ProcessContextReplacing<float> context(block);
+    processorChain.process(context);
     
 //    auto output = tempBlock.getSubBlock(0, (size_t)numSamples);
 //    output.clear();
@@ -97,20 +97,47 @@ void Voice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSam
 //        }
 //    }
     
-    for (int i = 0; i < numSamples; ++i) {
-        if (--lfoProcessingIndex == 0) {
-            lfoProcessingIndex = lfoDownsamplingRatio;
-            auto lfoOut = lfo.processSample(0.0f);
-            auto cutoffHz = juce::jmap(lfoOut, -1.0f, 1.0f, 100.0f, 4e3f);
-//            processorChain.get<filterIndex>().setCutoffFrequencyHz(cutoffHz);
+//    for (int i = 0; i < numSamples; ++i) {
+//        if (--lfoProcessingIndex == 0) {
+//            lfoProcessingIndex = lfoDownsamplingRatio;
+//            auto lfoOut = lfo.processSample(0.0f);
+//            auto cutoffHz = juce::jmap(lfoOut, -1.0f, 1.0f, 100.0f, 4e3f);
+////            processorChain.get<filterIndex>().setCutoffFrequencyHz(cutoffHz);
+//        }
+//    }
+//
+//    auto block = tempBlock.getSubBlock(0, (size_t)numSamples);
+//    block.clear();
+//    juce::dsp::ProcessContextReplacing<float> context(block);
+//    processorChain.process(context);
+//
+//    juce::dsp::AudioBlock<float> (outputBuffer).getSubBlock((size_t)startSample, (size_t)numSamples).add(tempBlock);
+    
+    // silence detector
+    bool active = false;
+    for (size_t ch = 0; ch < block.getNumChannels(); ++ch)
+    {
+        auto* channelPtr = block.getChannelPointer (ch);
+
+        for (int i = 0; i < numSamples; ++i)
+        {
+            if (channelPtr[i] != 0.0f)
+            {
+                active = true;
+                break;
+            }
         }
     }
-    
-    auto block = tempBlock.getSubBlock(0, (size_t)numSamples);
-    block.clear();
-    juce::dsp::ProcessContextReplacing<float> context(block);
-    processorChain.process(context);
-    
-    juce::dsp::AudioBlock<float> (outputBuffer).getSubBlock((size_t)startSample, (size_t)numSamples).add(tempBlock);
+
+    if (active)
+    {
+        juce::dsp::AudioBlock<float> (outputBuffer)
+            .getSubBlock ((size_t) startSample, (size_t) numSamples)
+            .add (tempBlock);
+    }
+    else
+    {
+        clearCurrentNote();
+    }
 }
 
