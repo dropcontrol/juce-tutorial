@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="bxjvPs" name="ComponentParentsChildren" projectType="guiapp"
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
+              jucerFormatVersion="1">
+  <MAINGROUP id="QkxTxR" name="ComponentParentsChildren">
+    <GROUP id="{DBB38522-12AF-EA0F-F7EF-EFB3D55DAAE0}" name="Source">
+      <FILE id="Hqw5id" name="SunComponent.h" compile="0" resource="0" file="Source/SunComponent.h"/>
+      <FILE id="hblLjS" name="SunComponent.cpp" compile="1" resource="0"
+            file="Source/SunComponent.cpp"/>
+      <FILE id="hyLjRP" name="RoofComponent.h" compile="0" resource="0" file="Source/RoofComponent.h"/>
+      <FILE id="dfveXB" name="RoofComponent.cpp" compile="1" resource="0"
+            file="Source/RoofComponent.cpp"/>
+      <FILE id="Gmn380" name="WallComponent.h" compile="0" resource="0" file="Source/WallComponent.h"/>
+      <FILE id="TNjt7b" name="WallComponent.cpp" compile="1" resource="0"
+            file="Source/WallComponent.cpp"/>
+      <FILE id="khLvH4" name="HouseComponent.h" compile="0" resource="0"
+            file="Source/HouseComponent.h"/>
+      <FILE id="KtSkfY" name="HouseComponent.cpp" compile="1" resource="0"
+            file="Source/HouseComponent.cpp"/>
+      <FILE id="bsabYT" name="FloorComponent.h" compile="0" resource="0"
+            file="Source/FloorComponent.h"/>
+      <FILE id="CM0aTt" name="FloorComponent.cpp" compile="1" resource="0"
+            file="Source/FloorComponent.cpp"/>
+      <FILE id="lKpop6" name="SceneComponent.h" compile="0" resource="0"
+            file="Source/SceneComponent.h"/>
+      <FILE id="PjIzBg" name="SceneComponent.cpp" compile="1" resource="0"
+            file="Source/SceneComponent.cpp"/>
+      <FILE id="YmYoES" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="gp1HK2" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="GtLg6N" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="ComponentParentsChildren"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="ComponentParentsChildren"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>
